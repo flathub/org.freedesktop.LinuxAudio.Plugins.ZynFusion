@@ -66,7 +66,7 @@
             ],
             "build-options": {
                 "env": {
-                    "VERSION": "3.0.5",
+                    "VERSION": "3.0.6-rc1",
                     "BUILD_MODE": "release"
                 }
             },
@@ -90,11 +90,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/mruby-zest/mruby-zest-build",
-                    "commit": "b4856145a4011332f403c88a64e3b7c46a29b383"
-                },
-                {
-                    "type": "patch",
-                    "path": "mruby-gcc10-fix.patch"
+                    "tag": "3.0.6-rc1",
+                    "commit": "934ccfd8f92d16dc83ee67a5349cc013c94e9c2b"
                 },
                 {
                     "type":"file",
