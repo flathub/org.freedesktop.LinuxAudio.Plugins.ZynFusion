@@ -18,9 +18,11 @@
         "prefix": "/app/extensions/Plugins/ZynFusion",
         "prepend-path": "/app/extensions/Plugins/ZynFusion/bin",
         "prepend-ld-library-path": "/app/extensions/Plugins/ZynFusion/lib",
-        "prepend-pkg-config-path": "/app/extensions/Plugins/ZynFusion/lib/pkgconfig"
+        "prepend-pkg-config-path": "/app/extensions/Plugins/ZynFusion/lib/pkgconfig",
+        "cppflags": "-I/app/extensions/Plugins/ZynFusion/include"
     },
     "modules": [
+        "shared-modules/linux-audio/fftw3f-static.json",
         "shared-modules/linux-audio/liblo-static.json",
         "shared-modules/linux-audio/lv2.json",
         "shared-modules/python2.7/python-2.7.json",
@@ -36,12 +38,10 @@
                 "--disable-shared"
             ],
             "cleanup": [
-                "/lib/libmxml.a",
+                "*.a",
                 "/lib/pkgconfig",
                 "/share",
                 "/include"
-            ],
-            "post-install": [
             ],
             "sources": [
                 {
@@ -52,13 +52,33 @@
             ]
         },
         {
+            "name": "libuv",
+            "build-options": {
+                "cflags": "-fPIC"
+            },
+            "config-opts": [
+                "--disable-shared",
+                "--enable-static"
+            ],
+            "cleanup": [
+                "/include",
+                "/lib/pkgconfig",
+                "*.a",
+                "*.la"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url":"http://dist.libuv.org/dist/v1.9.1/libuv-v1.9.1.tar.gz",
+                    "sha256": "e83953782c916d7822ef0b94e8115ce5756fab5300cca173f0de5f5b0e0ae928"
+                }
+            ]
+        },
+        {
             "name": "zest",
             "buildsystem": "simple",
             "build-commands": [
-                "mv libuv-v1.9.1.tar.gz deps/",
                 "ruby rebuild-fcache.rb",
-                "make setup",
-                "make builddep",
                 "make clean",
                 "rm -f package/qml/*.qml",
                 "ruby rebuild-fcache.rb",
@@ -66,12 +86,11 @@
             ],
             "build-options": {
                 "env": {
-                    "VERSION": "3.0.6-rc1",
+                    "CFLAGS": "-I/app/extensions/Plugins/ZynFusion/include",
+                    "VERSION": "3.0.6",
                     "BUILD_MODE": "release"
                 }
             },
-            "cleanup": [
-            ],
             "post-install": [
                 "install -d $FLATPAK_DEST/lib/qml",
                 "touch $FLATPAK_DEST/lib/qml/MainWindow.qml",
@@ -90,13 +109,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/mruby-zest/mruby-zest-build",
-                    "tag": "3.0.6-rc1",
-                    "commit": "934ccfd8f92d16dc83ee67a5349cc013c94e9c2b"
-                },
-                {
-                    "type":"file",
-                    "url":"http://dist.libuv.org/dist/v1.9.1/libuv-v1.9.1.tar.gz",
-                    "sha256": "e83953782c916d7822ef0b94e8115ce5756fab5300cca173f0de5f5b0e0ae928"
+                    "tag": "3.0.6",
+                    "commit": "dd3d45ba333011f2359e86f9a758d9836e53fe5f"
                 },
                 {
                     "type": "patch",
@@ -121,7 +135,8 @@
             "cleanup": [
                 "/bin",
                 "/share/bash-completion",
-                "/share/doc"
+                "/share/doc",
+                "/share/applications"
             ],
             "post-install": [
                 "mv ${FLATPAK_DEST}/vst ${FLATPAK_DEST}/lxvst",
@@ -134,8 +149,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.sourceforge.net/sourceforge/zynaddsubfx/zynaddsubfx/3.0.5/zynaddsubfx-3.0.5.tar.bz2",
-                    "sha256": "7447322268114a1e0ac5f281ac37a09a78e761a7be61999caf79100049789f63"
+                    "url": "https://download.sourceforge.net/sourceforge/zynaddsubfx/zynaddsubfx/3.0.6/zynaddsubfx-3.0.6.tar.bz2",
+                    "sha256": "cbd160778f6cf147f9b0487719edc5197a1404f46d7c7bfd89e153f0d8ce71ae"
                 },
                 {
                     "type": "file",

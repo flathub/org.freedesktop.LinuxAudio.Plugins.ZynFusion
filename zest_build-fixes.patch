@@ -1,7 +1,9 @@
-diff --git a/Makefile b/Makefile
-index f3e3be2..c1d68d8 100644
---- a/Makefile
-+++ b/Makefile
-@@ -66 +66 @@ deps/$(UV_DIR):
--	cd deps              && wget -4 $(UV_URL) && tar xvf $(UV_FILE)
-+	cd deps              && tar xvf $(UV_FILE)
+--- zest/src/osc-bridge/Makefile-orig	2022-01-22 18:09:24.685969262 -0500
++++ zest/src/osc-bridge/Makefile	2022-01-22 18:09:37.196086093 -0500
+@@ -1,5 +1,5 @@
+ SRC = src/bridge.c src/cache.c src/parse-schema.c src/schema.c rtosc/rtosc.c
+-CFLAGS_ = -std=gnu99 -Wall -Wextra -I .
++CFLAGS_ = -std=gnu99 -Wall -Wextra -I . -I/app/extensions/Plugins/ZynFusion/include
+ 
+ all: mock-test remote-test lib
+ 
