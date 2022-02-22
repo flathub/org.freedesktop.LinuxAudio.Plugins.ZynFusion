@@ -24,6 +24,7 @@
     "modules": [
         "shared-modules/linux-audio/fftw3f-static.json",
         "shared-modules/linux-audio/liblo-static.json",
+        "shared-modules/linux-audio/dssi.json",
         "shared-modules/linux-audio/lv2.json",
         "shared-modules/python2.7/python-2.7.json",
         {
@@ -139,8 +140,9 @@
                 "/share/applications"
             ],
             "post-install": [
-                "mv ${FLATPAK_DEST}/vst ${FLATPAK_DEST}/lxvst",
-                "strip ${FLATPAK_DEST}/lxvst/*.so",
+                "ln -sf vst $FLATPAK_DEST/lxvst",
+                "strip ${FLATPAK_DEST}/dssi/*.so",
+                "strip ${FLATPAK_DEST}/vst/*.so",
                 "strip ${FLATPAK_DEST}/lv2/*.lv2/*.so",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.ZynFusion.metainfo.xml",
                 "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.ZynFusion --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.ZynFusion",
