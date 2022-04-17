@@ -31,9 +31,7 @@
             "name": "libmxml",
             "buildsystem": "autotools",
             "build-options": {
-                "env": {
-                    "CFLAGS": "-fPIC"
-                }
+                "cflags": "-fPIC"
             },
             "config-opts": [
                 "--disable-shared"
@@ -86,8 +84,8 @@
                 "make"
             ],
             "build-options": {
+                "cflags": "-I/app/extensions/Plugins/ZynFusion/include",
                 "env": {
-                    "CFLAGS": "-I/app/extensions/Plugins/ZynFusion/include",
                     "VERSION": "3.0.6",
                     "BUILD_MODE": "release"
                 }
