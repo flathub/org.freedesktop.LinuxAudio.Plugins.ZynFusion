@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.ZynFusion",
-    "branch": "21.08",
+    "branch": "22.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
-    "runtime-version": "21.08",
-    "sdk": "org.freedesktop.Sdk//21.08",
+    "runtime-version": "stable",
+    "sdk": "org.freedesktop.Sdk//22.08",
     "build-extension": true,
     "appstream-compose": false,
     "cleanup": [
@@ -138,7 +138,6 @@
                 "/share/applications"
             ],
             "post-install": [
-                "ln -sf vst $FLATPAK_DEST/lxvst",
                 "strip ${FLATPAK_DEST}/dssi/*.so",
                 "strip ${FLATPAK_DEST}/vst/*.so",
                 "strip ${FLATPAK_DEST}/lv2/*.lv2/*.so",
