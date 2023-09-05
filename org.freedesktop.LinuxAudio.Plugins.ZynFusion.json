@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.ZynFusion",
-    "branch": "22.08",
+    "branch": "23.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//22.08",
+    "sdk": "org.freedesktop.Sdk//23.08",
     "build-extension": true,
     "appstream-compose": false,
     "cleanup": [
@@ -113,12 +113,12 @@
                 },
                 {
                     "type": "patch",
-                    "path": "zest_build-fixes.patch"
+                    "path": "patches/zest_build-fixes.patch"
                 }
             ]
         },
         {
-            "name": "zynadsubfx",
+            "name": "zynaddsubfx",
             "buildsystem": "cmake-ninja",
             "config-opts": [
                 "-DPluginLibDir=${FLATPAK_DEST}",
@@ -150,6 +150,10 @@
                     "type": "archive",
                     "url": "https://download.sourceforge.net/sourceforge/zynaddsubfx/zynaddsubfx/3.0.6/zynaddsubfx-3.0.6.tar.bz2",
                     "sha256": "cbd160778f6cf147f9b0487719edc5197a1404f46d7c7bfd89e153f0d8ce71ae"
+                },
+                {
+                    "type": "patch",
+                    "path": "patches/zynaddsubfx-build.patch"
                 },
                 {
                     "type": "file",
