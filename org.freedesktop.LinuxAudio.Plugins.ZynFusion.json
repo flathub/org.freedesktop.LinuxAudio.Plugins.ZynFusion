@@ -1,11 +1,10 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.ZynFusion",
-    "branch": "23.08",
+    "branch": "24.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//23.08",
+    "sdk": "org.freedesktop.Sdk//24.08",
     "build-extension": true,
-    "appstream-compose": false,
     "cleanup": [
         "/bin/pyth*",
         "/bin/pip*",
@@ -142,7 +141,6 @@
                 "strip ${FLATPAK_DEST}/vst/*.so",
                 "strip ${FLATPAK_DEST}/lv2/*.lv2/*.so",
                 "install -Dm644 --target-directory=${FLATPAK_DEST}/share/metainfo org.freedesktop.LinuxAudio.Plugins.ZynFusion.metainfo.xml",
-                "appstream-compose --basename=org.freedesktop.LinuxAudio.Plugins.ZynFusion --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.LinuxAudio.Plugins.ZynFusion",
                 "install -Dm644 -t $FLATPAK_DEST/share/licenses/zynadsubfx/ COPYING"
             ],
             "sources": [
