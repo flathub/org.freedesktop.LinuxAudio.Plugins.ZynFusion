@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.ZynFusion",
-    "branch": "24.08",
+    "branch": "25.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//24.08",
+    "sdk": "org.freedesktop.Sdk//25.08",
     "build-extension": true,
     "cleanup": [
         "/bin/pyth*",
@@ -73,6 +73,28 @@
             ]
         },
         {
+            "name": "ruby",
+            "config-opts": [
+                "--enable-shared"
+            ],
+            "build-options": {
+                "cflags": "-std=c17"
+            },
+            "cleanup": [
+                "*"
+            ],
+            "post-install": [
+                "cp /usr/lib/${FLATPAK_ARCH}-linux-gnu/libyaml-0.so* ${FLATPAK_DEST}/lib"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.2.tar.gz",
+                    "sha256": "61843112389f02b735428b53bb64cf988ad9fb81858b8248e22e57336f24a83e"
+                }
+            ]
+        },
+        {
             "name": "zest",
             "buildsystem": "simple",
             "build-commands": [
@@ -120,6 +142,7 @@
             "name": "zynaddsubfx",
             "buildsystem": "cmake-ninja",
             "config-opts": [
+                "-DCMAKE_POLICY_VERSION_MINIMUM=3.5",
                 "-DPluginLibDir=${FLATPAK_DEST}",
                 "-DGuiModule=zest",
                 "-DDemoMode=false",
