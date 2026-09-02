@@ -1,9 +1,9 @@
 {
     "id": "org.freedesktop.LinuxAudio.Plugins.ZynFusion",
-    "branch": "25.08",
+    "branch": "26.08",
     "runtime": "org.freedesktop.LinuxAudio.BaseExtension",
     "runtime-version": "stable",
-    "sdk": "org.freedesktop.Sdk//25.08",
+    "sdk": "org.freedesktop.Sdk//26.08",
     "build-extension": true,
     "cleanup": [
         "/bin/pyth*",
@@ -78,19 +78,32 @@
                 "--enable-shared"
             ],
             "build-options": {
-                "cflags": "-std=c17"
+                "cflags": "-std=c17 -Wno-error=implicit-function-declaration"
             },
             "cleanup": [
                 "*"
             ],
-            "post-install": [
-                "cp /usr/lib/${FLATPAK_ARCH}-linux-gnu/libyaml-0.so* ${FLATPAK_DEST}/lib"
-            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.2.tar.gz",
-                    "sha256": "61843112389f02b735428b53bb64cf988ad9fb81858b8248e22e57336f24a83e"
+                    "url": "https://cache.ruby-lang.org/pub/ruby/3.1/ruby-3.1.7.tar.xz",
+                    "sha256": "658acc455b6bda87ac6cc1380e86552b9c1af87055e7a127589c5bf7ed80b035"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "yaml",
+                    "cleanup": [
+                        "*"
+                    ],
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/yaml/libyaml.git",
+                            "commit": "2c891fc7a770e8ba2fec34fc6b545c672beb37e6",
+                            "tag": "0.2.5"
+                        }
+                    ]
                 }
             ]
         },
@@ -150,6 +163,8 @@
             ],
             "build-options": {
                 "env": {
+                    "CFLAGS": "-fPIC",
+                    "CXXFLAGS": "-fPIC",
                     "LDFLAGS": "-lm"
                 }
             },
